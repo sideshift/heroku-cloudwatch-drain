@@ -63,6 +63,7 @@ func (p *logParser) parse() (*LogEntry, error) {
 	}
 
 	message := app + "[" + process + "]: " + string(p.b[p.cursor:])
+	message := string(p.b[p.cursor:])
 
 	return &LogEntry{
 		Time:    t,
