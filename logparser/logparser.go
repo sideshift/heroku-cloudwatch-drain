@@ -44,30 +44,30 @@ func (p *logParser) parse() (*LogEntry, error) {
 		return nil, fmt.Errorf("failed to parse TIMESTAMP: %s", err)
 	}
 
-	if err = p.skip(1); err != nil {
+	if err = p.skip(3); err != nil {
 		return nil, fmt.Errorf("failed to skip to APP-NAME: %s", err)
 	}
 
-	_, err := p.nextWord()
-	if err != nil {
-		return nil, fmt.Errorf("failed to read APP-NAME: %s", err)
-	}
+	// app, err := p.nextWord()
+	// if err != nil {
+	// 	return nil, fmt.Errorf("failed to read APP-NAME: %s", err)
+	// }
 
-	_, err := p.nextWord()
-	if err != nil {
-		return nil, fmt.Errorf("failed to read PROCID: %s", err)
-	}
+	// process, err := p.nextWord()
+	// if err != nil {
+	// 	return nil, fmt.Errorf("failed to read PROCID: %s", err)
+	// }
 
 	if err = p.skip(1); err != nil {
 		return nil, fmt.Errorf("failed to skip to MSG: %s", err)
 	}
 
-	// message := app + "[" + process + "]: " + string(p.b[p.cursor:])
+	// message := app + "[" + process + "]: " + string(p.b[p.cursor:])~~
 	message := string(p.b[p.cursor:])
 
 	return &LogEntry{
 		Time:    t,
-		Message: message2,
+		Message: message,
 	}, nil
 }
 
