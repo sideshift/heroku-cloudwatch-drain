@@ -48,12 +48,12 @@ func (p *logParser) parse() (*LogEntry, error) {
 		return nil, fmt.Errorf("failed to skip to APP-NAME: %s", err)
 	}
 
-	app, err := p.nextWord()
+	_, err := p.nextWord()
 	if err != nil {
 		return nil, fmt.Errorf("failed to read APP-NAME: %s", err)
 	}
 
-	process, err := p.nextWord()
+	_, err := p.nextWord()
 	if err != nil {
 		return nil, fmt.Errorf("failed to read PROCID: %s", err)
 	}
@@ -62,8 +62,8 @@ func (p *logParser) parse() (*LogEntry, error) {
 		return nil, fmt.Errorf("failed to skip to MSG: %s", err)
 	}
 
-	message := app + "[" + process + "]: " + string(p.b[p.cursor:])
-	message2 := string(p.b[p.cursor:])
+	// message := app + "[" + process + "]: " + string(p.b[p.cursor:])
+	message := string(p.b[p.cursor:])
 
 	return &LogEntry{
 		Time:    t,
